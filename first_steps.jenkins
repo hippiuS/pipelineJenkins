@@ -8,8 +8,8 @@ pipeline {
         }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-        timestamps()
-    }
+        }
+    timestamps {
     stages {
         stage("First step") {
             steps {
@@ -26,5 +26,5 @@ pipeline {
                 sh 'ssh alex@192.168.226.10 \'ls -la /etc\''
             }
         }
-    }
+    }}
 }

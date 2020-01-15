@@ -13,7 +13,7 @@ pipeline {
         stage("Second step") {
             steps {
                 dir('pipe') { 
-                    sh 'docker build . '
+                    sh 'docker build -t box:latest . '
                 }
             }
         }

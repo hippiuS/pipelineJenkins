@@ -1,5 +1,5 @@
 #!groovy
-// Check ub1 properties
+// Check Ansible properties
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -13,17 +13,17 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh 'ssh alex@192.168.226.10 \'hostname\''
+                sh 'ssh alex@ansible \'hostname\''
             }
         }
         stage("Second step") {
             steps {
-                sh 'ssh alex@192.168.226.10 \'uptime\''
+                sh 'ssh alex@ansible \'uptime\''
             }
         }
         stage("Third step") {
             steps {
-                sh 'ssh alex@192.168.226.10 \'ls -la /etc\''
+                sh 'ssh alex@ansible \'ls -la /etc\''
             }
         }
     }

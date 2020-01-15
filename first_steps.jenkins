@@ -13,17 +13,17 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh 'ssh alex@ansible \'hostname\''
+                sh 'ssh root@ansible \'hostname\''
             }
         }
         stage("Second step") {
             steps {
-                sh 'ssh alex@ansible \'uptime\''
+                sh 'ssh root@ansible \'uptime\''
             }
         }
         stage("Third step") {
             steps {
-                sh 'ssh alex@ansible \'ls -la /etc\''
+                sh 'ssh root@ansible \'ls -la /etc\''
             }
         }
     }

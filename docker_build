@@ -10,16 +10,23 @@ pipeline {
          timestamps()
             }
     stages {
-        stage("Second step") {
+        stage("Docker login") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhun_hippius', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh "docker login -u $USERNAME -p $PASSWORD"
+                }
+            }
+        }
+        stage("Docker build") {
             steps {
                 dir('pipe') { 
                     sh 'docker build -t hippiuS/box:latest . '
                 }
             }
         }
-        stage("Third step") {
+        stage("Docker push") {
             steps {
-                sh 'ssh root@ansible \'ls -la /etc\''
+                sh 'docker push hippius/box:latest'
             }
         }
     }

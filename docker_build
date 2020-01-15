@@ -1,1 +1,28 @@
-
+#!groovy
+properties([disableConcurrentBuilds()])
+pipeline {
+    agent { 
+        label 'master'
+        }
+    options {
+         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+         timestamps()
+            }
+    stages {
+        stage("First step") {
+            steps {
+                sh 'git clone https://github.com/hippiuS/pipelineJenkins.git pipe'
+            }
+        }
+        stage("Second step") {
+            steps {
+                 sh 'docker build Dockerfile'
+            }
+        }
+        stage("Third step") {
+            steps {
+                sh 'ssh root@ansible \'ls -la /etc\''
+            }
+        }
+    }
+}

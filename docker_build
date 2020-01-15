@@ -9,15 +9,10 @@ pipeline {
          timestamps()
             }
     stages {
-        stage("First step") {
-            steps {
-                sh 'git clone https://github.com/hippiuS/pipelineJenkins.git pipe'
-            }
-        }
         stage("Second step") {
             steps {
                 dir('pipe') { 
-                    sh 'docker build Dockerfile'
+                    sh 'docker build . '
                 }
             }
         }

@@ -16,7 +16,9 @@ pipeline {
         }
         stage("Second step") {
             steps {
-                 sh 'docker build Dockerfile'
+                dir('pipe') { 
+                    sh 'docker build Dockerfile'
+                }
             }
         }
         stage("Third step") {

@@ -4,29 +4,29 @@ pipeline {
     agent { 
         label 'master'
         }
-    triggers { pollSCM('* * * * *') }
+    #triggers { pollSCM('* * * * *') }
     options {
          buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
          timestamps()
             }
     stages {
-        stage("Docker login") {
+        stage("Get code") {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_hippius', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                   sh "echo $PASSWORD && docker login -u $USERNAME -p $PASSWORD"
+                sh "git clone https://github.com/hippiuS/test_django.git"
+            }
+        }
+        stage("Network step") {
+            steps {
+                dir('terraform/network') { 
+                    sh 'terraform init && terraform play'
                 }
             }
         }
-        stage("Docker build") {
+        stage("app step") {
             steps {
-                dir('pipe') { 
-                    sh 'docker build -t hippius/box:latest . '
+                dir('terraform/') { 
+                    sh 'terraform init && terraform play'
                 }
-            }
-        }
-        stage("Docker push") {
-            steps {
-                sh 'docker push hippius/box:latest'
             }
         }
     }

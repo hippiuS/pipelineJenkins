@@ -18,14 +18,14 @@ pipeline {
         stage("Network step") {
             steps {
                 dir('app/terraform/network/') { 
-                    sh 'terraform init && terraform apply'
+                    sh 'terraform init && terraform apply <<< yes'
                 }
             }
         }
         stage("app step") {
             steps {
                 dir('app/terraform/') { 
-                    sh 'terraform init && terraform apply'
+                    sh 'terraform init && terraform apply <<< yes'
                 }
             }
         }

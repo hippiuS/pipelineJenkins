@@ -12,19 +12,19 @@ pipeline {
     stages {
         stage("Get code") {
             steps {
-                sh "git clone https://github.com/hippiuS/test_django.git"
+                sh "git clone https://github.com/hippiuS/test_django.git app/"
             }
         }
         stage("Network step") {
             steps {
-                dir('terraform/network') { 
+                dir('app/terraform/network/') { 
                     sh 'terraform init && terraform play'
                 }
             }
         }
         stage("app step") {
             steps {
-                dir('terraform/') { 
+                dir('app/terraform/') { 
                     sh 'terraform init && terraform play'
                 }
             }

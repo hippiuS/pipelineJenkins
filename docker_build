@@ -13,6 +13,7 @@ pipeline {
         stage("Get code") {
             when {
                 environment name: 'BUILD_NUMBER', value: '1'
+            }
             steps {
                 sh "git clone https://github.com/hippiuS/test_django.git app/"
             }
@@ -22,10 +23,10 @@ pipeline {
                 not {
                     environment name: 'BUILD_NUMBER', value: '1'
                 }
+            }
                 steps {
                     sh "git pull app/"
                 }
-            }
         }
         stage("Network step") {
             steps {

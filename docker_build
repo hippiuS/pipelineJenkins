@@ -24,9 +24,11 @@ pipeline {
                     environment name: 'BUILD_NUMBER', value: '1'
                 }
             }
-                steps {
-                    sh "git pull app/"
+            steps {
+                dir('app/') {
+                    sh "git pull"
                 }
+            }
         }
         stage("Network step") {
             steps {

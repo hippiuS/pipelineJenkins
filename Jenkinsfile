@@ -17,7 +17,7 @@ pipeline {
 
         stage('build 1.2') {
           steps {
-            error 'some network exception'
+            echo 'success'
           }
         }
 

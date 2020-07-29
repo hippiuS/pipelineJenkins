@@ -44,6 +44,30 @@ pipeline {
           }
         }
 
+        stage('build 2.3') {
+          steps {
+            echo 'success'
+          }
+        }
+
+        stage('build 2.4') {
+          steps {
+            echo 'success'
+          }
+        }
+
+        stage('build 2.5') {
+          steps {
+            error 'error'
+          }
+        }
+
+        stage('build 2.6') {
+          steps {
+            echo 'test'
+          }
+        }
+
       }
     }
 
